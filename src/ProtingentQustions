@@ -1,0 +1,602 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		//Element Questions Outputs
+		//**********************************
+		
+		System.out.println(PrintHello());
+		System.out.println(Greeting());
+		System.out.println(GreetingAliceAndBob());
+		System.out.println(SumOfInput());
+		System.out.println(SumOfMultipleOfThreeOrFive());
+		System.out.println(SumOfMultipleOfThreeOrFive());
+		PossibilityOfCompute();
+		MultiplicationTable();
+		PrimeNumbers();
+		GuessingGame();
+		LeapYear();
+		
+		//ListString Questions Outputs
+		//**********************************
+		
+		System.out.println(LargestElement());
+		System.out.println(ReverseList());
+		System.out.print(CheckElementOccurs());
+		System.out.println(ReturnOddIndexes());
+		System.out.println(TotalOfList());
+		System.out.println(FindPalindrome());
+		System.out.println(SumOfListForLoop());
+		System.out.println(SumOfListWhileLoop());
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);
+		System.out.println(SumOfListRecursion(sampleList, 0));
+		System.out.println(ConcatenateLists());
+		System.out.println(ConcatenateListsByElements());
+		System.out.print(MergeAndSortLists());
+		System.out.println(RotateListByElement());
+		First100Fibonacci();
+		DigitsOfNumbers(546423);
+		
+		int[] list = {4, 5, 3, 8, 1};
+		
+		System.out.println(Arrays.toString(SelectionSort(list)));
+		System.out.println(Arrays.toString(InsertionSort(list)));
+		
+		MergeSort(list, 0, list.length);
+		System.out.println(Arrays.toString(list));
+		
+		QuickSort(list, 0, list.length - 1);
+		System.out.println(Arrays.toString(list));
+		
+		StoogeSort(list, 0, list.length - 1);
+		System.out.println(Arrays.toString(list));
+		
+		System.out.println(BinarySearch(list, 3));
+		
+		ArrayList<String> listStr = new ArrayList<String>(5);
+		listStr.add("Hello");
+		listStr.add("World");
+		listStr.add("in");
+		listStr.add("a");
+		listStr.add("frame");
+		printWithStarFrame(listStr);
+		
+	}
+	// Elementary Questions 
+	
+	//Elementary - 1
+	public static String PrintHello(){
+		return "Hello World";
+	}
+	
+	//Elementary - 2
+	public static String Greeting(){
+		Scanner scan = new Scanner(System.in);
+		String name = scan.next();
+		scan.close();
+
+		return "Hello " + name;
+	}
+	
+	//Elementary - 3
+	public static String GreetingAliceAndBob(){
+		Scanner scan = new Scanner(System.in);
+		String name = scan.next();
+		scan.close();
+
+		name.toLowerCase();
+		
+		if(name.equals("alice") || name.equals("bob")){
+			return "Hello " + name;
+		}
+		return "";
+	}
+
+	//Elementary - 4
+	public static int SumOfInput(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter a number for sum: ");
+		int number = scan.nextInt();
+		scan.close();
+		int sum = 0;
+		for(int i = 0; i <= number; i++){
+			sum = sum + i;
+		}
+		return sum;
+	}
+
+	//Elementary - 5
+	public static int SumOfMultipleOfThreeOrFive(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter a number for sum: ");
+		int number = scan.nextInt();
+		scan.close();
+		int sum = 0;
+		
+		for(int i = 0; i <= number; i++){
+			if(i % 3 == 0 || i % 5 == 0){
+				sum = sum + i;
+			}
+		}
+		return sum;
+	}
+	
+	//Elementary - 6
+	public static void PossibilityOfCompute(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter a number for loop: ");
+		int number = scan.nextInt();
+		System.out.println("Write '1' for sum, '2' for products: ");
+		int numberOfChoice = scan.nextInt();
+		scan.close();
+		
+		if(numberOfChoice == 1){
+			int sum = 0;
+			for(int i = 0; i <= number; i++){
+				sum = sum + i;
+			}
+			System.out.println("Sum of number: " + sum);
+		}
+		if(numberOfChoice == 2){
+			for(int i = 0; i <= 5; i++){
+				System.out.print(i + ", ");
+			}
+		}
+	}
+
+	//Elementary - 7
+	public static void MultiplicationTable(){
+		int result = 0;
+		for(int i = 1; i <= 12; i++){
+			for(int y = 1; y <= 12; y++){
+				result = i * y;
+				System.out.println(i + " x " + y + " = " + result);
+			}
+			System.out.println("\n");
+		}
+	}
+	
+	//Elementary - 8
+	public static void PrimeNumbers(){
+		for(int i=2; i < 100; i++){
+			boolean isPrime = true;
+			for(int j=2; j < i ; j++){
+				if(i % j == 0){
+					isPrime = false;
+					break;
+					}
+				}
+			if(isPrime)
+				System.out.print(i + " ");
+			}
+	}	
+
+	//Elementary - 9
+	public static void GuessingGame(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Guess a number: ");
+		int number = scan.nextInt();
+		
+		Random rand = new Random();
+		int randNumber = rand.nextInt(number + 10) + 1;
+		int count = 0;
+		
+		while(count < 3){
+			if(number > randNumber){
+				System.out.println("Guess lower number: ");
+				number = scan.nextInt();
+			}
+			if(number < randNumber){
+				System.out.println("Guess higher number: ");
+				number = scan.nextInt();
+			}
+			if(number == randNumber){
+				System.out.println("Yay! You found it: " + number);
+				break;
+			}
+			count++;
+		}
+		if(count == 3){
+			System.out.println("You didn't guess. The number was: " + randNumber);
+		}
+		scan.close();
+	}
+
+	//Elementary - 10
+	public static void LeapYear(){
+		int todayYear = 2017;
+		for(int i = todayYear; i <= todayYear + 20; i++){
+			if (( i%400 == 0)|| (( i%4 == 0 ) &&( i%100 != 0))) {
+				System.out.println(i + " is a Leap Year.");
+			}
+		}
+	}
+
+	//Elementary - 11
+	//No solution
+
+	//Lists, Strings Questions
+	
+//	List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);	
+	
+	//ListStrings - 1
+	public static int LargestElement(){
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);	
+		int maxVal = sampleList.get(0);
+		for(int i = 0; i < sampleList.size(); i++){
+			if(sampleList.get(i) > maxVal){
+				maxVal = sampleList.get(i);
+			}
+		}
+		return maxVal;
+	}
+	
+	//ListStrings - 2
+	public static List<Integer> ReverseList(){
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);
+		List<Integer> reversedList = new ArrayList<Integer>();
+		
+		for(int i = sampleList.size() - 1; i >= 0; i--){
+			reversedList.add(sampleList.get(i));
+		}
+		return reversedList;
+	}
+	
+	//ListStrings - 3
+	public static boolean CheckElementOccurs(){
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);	
+		boolean check = false;
+		int element = 10;
+		for(int i = 0; i < sampleList.size(); i++){
+			if(sampleList.contains(element)){
+				check = true;
+			}
+		}
+		return check;
+	}
+	
+	//ListStrings - 4
+	public static List<Integer> ReturnOddIndexes(){
+		List<Integer> resultList = new ArrayList<Integer>();
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);
+		
+		for(int i = 0; i < sampleList.size(); i++){
+			if(i%2 != 0){
+				resultList.add(sampleList.get(i));
+			}
+		}
+		return resultList;
+	}
+	
+	//ListStrings - 5
+	public static int TotalOfList(){
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);
+		int total = 0;
+		
+		for(int item : sampleList){
+			total = total + item;
+		}
+		return total;
+	}
+	
+	//ListStrings - 6
+	public static List<String> FindPalindrome(){
+		List<String> stringList = Arrays.asList("aba", "racecar", "apple");
+		List<String> palindromeList = new ArrayList<String>();
+	
+        int check = 0;        
+		for(String item : stringList){
+			int end  = item.length() - 1;
+		    int start = 0;
+		    
+		    while(item.charAt(start) == item.charAt(end)){
+		    	end--;
+		    	start++;
+		    	check++;
+		        if(check == item.length() - 1)
+	                break;
+		    }
+		    if(check == item.length() -1){
+		    	palindromeList.add(item);
+		    }
+		}
+		return palindromeList;
+	}
+	
+	//ListStrings - 7
+	public static int SumOfListForLoop(){
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);
+		int sum = 0;
+		
+		for(int i = 0; i < sampleList.size(); i++){
+			sum = sum + sampleList.get(i);
+		}
+		return sum;
+	}
+	
+	public static int SumOfListWhileLoop(){
+		List<Integer> sampleList = Arrays.asList(1, 10, 20, 100, 90, 70, 80);
+		int sum = 0;
+		int count = 0;
+		
+		while(count < sampleList.size()){
+			sum = sum + sampleList.get(count);
+			count++;
+		}
+		return sum;
+	}
+	
+	public static int SumOfListRecursion(List<Integer> inputList, int start){	
+		if(start == inputList.size()) return 0;
+		return inputList.get(start) + SumOfListRecursion(inputList, start + 1);
+	}
+	
+	//ListStrings - 8
+	public static void On_All(){
+		
+	}
+	
+	//ListStrings - 9
+	public static String[] ConcatenateLists(){
+		String[] list1 = {"a", "b", "c"};
+		String[] list2 = {"1", "2", "3"};
+		
+		String[] result = new String[list1.length + list2.length];
+		int i = 0;
+		for(i = 0; i < list1.length; i++){
+			result[i] = list1[i];
+		}
+		for(int a = i, y = 0 ; y < list2.length; y++, a++){
+			result[a] = list2[y];
+		}
+		return result;
+	}
+	
+	//ListStrings - 10
+	public static String[] ConcatenateListsByElements(){
+		String[] list1 = {"a", "b", "c"};
+		String[] list2 = {"1", "2", "3"};
+		
+		String[] result = new String[list1.length + list2.length];
+
+		int max = Math.max(list1.length, list2.length);
+		int j = 0, k = 0, l = 0;
+		for(int i = 0; i < max; i++){
+			if(j < list1.length){
+				result[l++] = list1[j++];
+			}
+			if(k < list2.length){
+				result[l++] = list2[k++];
+			}
+		}
+		return result;
+	}
+
+	//ListStrings - 11
+	public static int[] MergeAndSortLists(){
+		int[] list1 = {1, 4, 6};
+		int[] list2 = {2, 3, 5};
+		
+		int[] sortedList = new int[list1.length + list2.length];
+	
+		for(int i = 0; i < list1.length; i++){
+			sortedList[i] += list1[i]; 
+		}
+		
+		for(int y = list1.length, k = 0; y < list1.length + list2.length; y++, k++){
+			sortedList[y] += list2[k];
+		}
+		
+		Arrays.sort(sortedList);
+		
+		return sortedList;
+	}
+
+	//ListStrings - 12
+	public static int[] RotateListByElement(){
+		int[] sampleList = {1, 2, 3, 4, 5, 6};
+		int n = 2;
+		int temp;
+		for(int i = 0; i < n; i++){
+			temp = sampleList[0];
+			int y = 0;
+			for(y = 0; y < sampleList.length - 1; y++){
+				sampleList[y] = sampleList[y + 1];
+			}
+			sampleList[y] = temp;
+		}
+		return sampleList;
+	}
+	
+	//ListStrings - 13
+	public static void First100Fibonacci(){
+		 int n, a = 1, b = 1, c = 1;
+	        for(int i = 1; i <= 100; i++)
+	        {
+	            a = b;
+	            b = c;
+	            c = a + b;
+	            System.out.print(a+" ");
+	        }
+	}
+
+	//ListStrings - 14
+	public static void DigitsOfNumbers(int n){
+		
+		if(n/ 10 > 0) {
+			DigitsOfNumbers(n / 10);
+	    }
+	    System.out.printf("%d ", n % 10);
+    }
+
+	//ListStrings - 17
+	
+	public static int[] SelectionSort(int[] input){
+		 for (int i = 0; i < input.length - 1; i++)
+	        {
+	            int index = i;
+	            for (int j = i + 1; j < input.length; j++)
+	                if (input[j] < input[index])
+	                    index = j;
+	      
+	            int smallerNumber = input[index]; 
+	            input[index] = input[i];
+	            input[i] = smallerNumber;
+	        }
+		 return input;
+	}
+	
+	public static int[] InsertionSort(int[] input){
+		int temp;
+        for (int i = 1; i < input.length; i++) {
+            for(int j = i ; j > 0 ; j--){
+                if(input[j] < input[j-1]){
+                    temp = input[j];
+                    input[j] = input[j-1];
+                    input[j-1] = temp;
+                }
+            }
+        }
+        return input;
+	}
+	
+	public static void MergeSort(int[] arr, int low, int high){
+		int N = high - low;         
+        if (N <= 1) 
+            return; 
+        int mid = low + N/2; 
+        // recursively sort 
+        MergeSort(arr, low, mid); 
+        MergeSort(arr, mid, high); 
+        // merge two sorted subarrays
+        int[] temp = new int[N];
+        int i = low, j = mid;
+        for (int k = 0; k < N; k++) 
+        {
+            if (i == mid)  
+                temp[k] = arr[j++];
+            else if (j == high) 
+                temp[k] = arr[i++];
+            else if (arr[j]<arr[i]) 
+                temp[k] = arr[j++];
+            else 
+                temp[k] = arr[i++];
+        }    
+        for (int k = 0; k < N; k++) 
+            arr[low + k] = temp[k];   
+	}
+	
+	public static void QuickSort(int[] arr, int low, int high){
+		if (arr == null || arr.length == 0)
+			return;
+ 
+		if (low >= high)
+			return;
+ 
+		// pick the pivot
+		int middle = low + (high - low) / 2;
+		int pivot = arr[middle];
+ 
+		// make left < pivot and right > pivot
+		int i = low, j = high;
+		while (i <= j) {
+			while (arr[i] < pivot) {
+				i++;
+			}
+ 
+			while (arr[j] > pivot) {
+				j--;
+			}
+ 
+			if (i <= j) {
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+				i++;
+				j--;
+			}
+		}
+ 
+		// recursively sort two sub parts
+		if (low < j)
+			QuickSort(arr, low, j);
+ 
+		if (high > i)
+			QuickSort(arr, i, high);
+	}
+	
+	public static void StoogeSort(int[] arr, int low, int high){
+		if (arr[high] < arr[low]) {
+            int tmp = arr[low];
+            arr[low] = arr[high];
+            arr[high] = tmp;
+        }
+        if (high - low > 1) {
+            int t = (high - low + 1) / 3;
+            StoogeSort(arr, low, high - t);
+            StoogeSort(arr, low + t, high);
+            StoogeSort(arr, low, high - t);
+        }
+	}
+	
+	//ListStrings - 18
+	public static int BinarySearch(int[] inputArr, int key){
+		 int start = 0;
+	        int end = inputArr.length - 1;
+	        while (start <= end) {
+	            int mid = (start + end) / 2;
+	            if (key == inputArr[mid]) {
+	                return mid;
+	            }
+	            if (key < inputArr[mid]) {
+	                end = mid - 1;
+	            } else {
+	                start = mid + 1;
+	            }
+	        }
+	        return -1;
+	}
+
+	//ListStrings - 19
+	public static void printWithStarFrame(List<String> in) {
+		assert(in != null);
+		int size = getMaxWordLength(in); //get the size of the frame
+		printNStarsAndNewline(size+4); //print the top line
+		//print the values
+		String temp;
+		for (int i = 0; i< in.size(); i++) {
+			temp = in.get(i);
+			System.out.print("* " + temp); 
+			printNSpacesNoNewline(size-temp.length()); //make sure the word fills up frame
+			System.out.println(" *");
+		}
+		printNStarsAndNewline(size+4); //print the bottom line
+	}
+	
+	//print n stars + a newline '\n'
+	private static void printNStarsAndNewline(int n) {
+		for (int i = 0; i<n;i++)
+			System.out.print("*");
+		System.out.println(); // \n newline
+	}
+	
+	//returns the length of the longest String in the List
+	private static int getMaxWordLength(List<String> in) {
+		int max = 0;
+		int temp;
+		for (String s : in)
+			max = ((temp=s.length()) > max) 
+				? temp : max;
+		return max;
+	}
+	
+	private static void printNSpacesNoNewline(int n) {
+		for (int i = 0; i< n; i++) System.out.print(" ");	
+	}
+}
